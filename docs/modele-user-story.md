@@ -16,7 +16,7 @@ Une user story décrit un besoin du point de vue de la personne qui utilise l’
 
 ## 2. Critères d’acceptation
 
-Un critère d’acceptation précise quand la user story est satisfaite. Chacun se vérifie par un essai, décrit en trois parties selon la méthode Gherkin (en anglais : « Given… When… Then… »).
+Un critère d’acceptation précise quand la user story est satisfaite. Il est rédigé pour qu’un essai sur l’application terminée dise sans interprétation s’il est respecté. Il se décrit en trois parties selon la méthode Gherkin (en anglais : « Given… When… Then… »).
 
 | Situation<br>*Étant donné…* | Action<br>*Quand…* | Résultat attendu<br>*Alors…* |
 | --- | --- | --- |
