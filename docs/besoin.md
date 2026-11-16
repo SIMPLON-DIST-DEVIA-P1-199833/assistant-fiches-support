@@ -38,56 +38,56 @@ Le technicien support ouvre un terminal, il saisit des mots clés de l'appel, vo
 | 5 | Technicien support | Retour à 2 |
 
 ## User stories
-| User story | Première requête : obtention résumé et listing fiches pertinentes |
+| US1| Première requête : obtention résumé et listing fiches pertinentes |
 | --- | --- |
 | **En tant que** | Technicien support |
 | **Etant donné que** | J'ai ouvert la console de l'application |
 | **Lorsque** | j'écris des mots clés ou une question et appuie sur entrée |
 | **Alors** | Je vois un résumé optionnel de réponse, un nombre de fiches pertinentes, et numérotées : une liste de fiches pertinentes (brouillon ou publiées) à ma demande, par ordre décroissant de pertinence |
 
-| User story | Obtention résumé & listing fiches vide |
+| US2 | Obtention résumé & listing fiches vide |
 | --- | --- |
 | **En tant que** | Technicien support |
 | **Etant donné que** | J'ai ouvert la console de l'application |
 | **Lorsque** | J'écris des mots clés ou une questions sans fiche pertinente |
 | **Alors** | Je vois une réponse : aucune fiche pertinente trouvée. Je peux créer un brouillon en appuyant sur entrée |
 
-| User story | Création brouillon |
+| US3 | Création brouillon |
 | --- | --- |
 | **En tant que** | Technicien support |
 | **Etant donné que** | Je suis tombé sur un listing sans résultats |
 | **Lorsque** | J'appuie sur entrée une seconde fois |
 | **Alors** | J'entre dans un mode de création de brouillon, avec des champs titre (première question), et un champs corps (seconde question). Quand je fais le raccourci Ctrl+C je sors du brouillon en l'enregistrant. Quand je fais Echap, je sors du brouillon en l'annulant. |
 
-| User story | Edition brouillon |
+| US4 | Edition brouillon |
 | --- | --- |
 | **En tant que** | Technicien support |
 | **Etant donné que** | J'ai choisi d'ouvrir un brouillon pré-créé, parmi un listing de résultats |
 | **Lorsque** | Je fais le raccourci Ctrl+E |
 | **Alors** | J'entre dans un mode de modification de ce brouillon, avec la première question pour le titre, la seconde question pour le corps. Quand je fais le raccourci Ctrl+C je sors du brouillon en l'enregistrant. Quand je fais Echap, je sors du brouillon en annulant mes changements. Si je fais Ctrl+I, je peux notifier le brouillon comme impertinent, à la fois en tant que statut et indiquer la raison de l'impertinence. |
 
-| User story | Ouverture fiche à partir de listing |
+| US5 | Ouverture fiche à partir de listing |
 | --- | --- |
 | **En tant que** | Technicien support |
 | **Etant donné que** | J'ai déjà une liste de résultats non vide |
 | **Lorsque** | J'entre un numéro de fiche et appuie sur entrée |
 | **Alors** | Je vois la fiche en plein écran et peux quitter pour revenir au listing précédent |
 
-| User story | Nouvelle requête |
+| US6 | Nouvelle requête |
 | --- | --- |
 | **En tant que** | Technicien support |
 | **Etant donné que** | J'ai déjà fait une requête |
 | **Lorsque** | Je fais le raccourci Ctrl+C |
 | **Alors** | J'entre dans une nouveau prompt juste après l'ancien |
 
-| User story | Sortie de la console |
+| US7 | Sortie de la console |
 | --- | --- |
 | **En tant que** | Technicien support |
 | **Etant donné que** | J'ai déjà fait une requête |
 | **Lorsque** | Je fais le raccourci Ctrl+D |
 | **Alors** | Je sors de l'application | 
 
-| User story | Acessibilité audio |
+| US8 | Acessibilité audio |
 | --- | --- |
 | **En tant que** | Technicien support malvoyant |
 | **Etant donné que** | J'ai tapé le mot AUDIO en prompt ou que le terminal est configuré pour mon handicap |
