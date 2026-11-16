@@ -44,7 +44,7 @@ Acteurs : l’**agent du support**, l’**assistant** (outil en CLI qui accède 
 | 6B | Service d’IA | Rédige le brouillon (Symptôme, Étapes, Vérification) et propose un nom de fichier |
 | 7B | Assistant | Affiche le brouillon et le nom de fichier proposé |
 | 8B | Agent du support | Valide ou refuse l’enregistrement |
-| 9B | Assistant | Si l’agent valide et que le nom est libre, crée la nouvelle fiche. Si une fiche porte déjà ce nom, l’indique et n’enregistre rien. Si l’agent refuse, n’enregistre rien |
+| 9B | Assistant | Si l’agent valide et que le nom est libre, et que le brouillon fait au plus 20ko, crée la nouvelle fiche. Si une fiche porte déjà ce nom, l’indique et n’enregistre rien. Si l’agent refuse, n’enregistre rien |
  
 ```mermaid
 sequenceDiagram
@@ -84,14 +84,18 @@ sequenceDiagram
 | 2 | 1 | Deux fiches correspondent précisément à la question | L’agent pose sa question | La réponse présente la procédure de chaque fiche et cite le nom de chacune |
 | 3 | 1 | Une fiche liée à la question dépasse 20 ko | L’agent pose sa question | Un message indique que cette fiche dépasse 20 ko et n’est pas utilisée ; aucun brouillon n’est proposé |
 | 4 | 1 | La question n’a aucun rapport avec le support | L’agent pose sa question | Un message indique que la question sort du champ du support ; aucune procédure ni aucun brouillon n’est proposé |
-| 5 | 2 | Aucune fiche ne correspond à une question liée au support | L’agent pose sa question | Un message indique qu’aucune fiche ne couvre la question ; aucune procédure n’est affichée ; un brouillon est proposé |
-| 6 | 2 | Un brouillon est affiché avec un nom de fichier libre | L’agent valide l’enregistrement | Une nouvelle fiche en français, avec les sections Symptôme, Étapes et Vérification, apparaît dans le dossier des fiches ; aucun autre fichier n’est créé ni modifié |
-| 7 | 2 | Un brouillon est affiché | L’agent refuse l’enregistrement | Aucun fichier n’est créé ni modifié |
-| 8 | 2 | Le nom de fichier proposé correspond à une fiche existante | L’agent valide l’enregistrement | Un message indique qu’une fiche porte déjà ce nom ; aucun fichier n’est créé ; la fiche existante n’est pas modifiée |
-| 9 | 1, 2 | Le service d’IA ne répond pas | L’agent pose sa question | Au bout de 30 s, un message d’erreur s’affiche et l’assistant accepte une nouvelle question |
-| 10 | 1, 2 | 10 questions ont déjà été posées pendant la session | L’agent pose une 11ᵉ question | Un message indique que la limite de questions est atteinte ; aucune réponse n’est produite |
-| 11 | 1, 2 | L’assistant a compté 60 000 jetons échangés pendant la session | L’agent pose une nouvelle question | Un message indique que la limite de la session est atteinte ; aucune réponse n’est produite |
-| 12 | 1, 2 | Nous sommes un dimanche, ou en semaine avant 9 h ou après 17 h | L’agent pose une question | Un message indique que l’assistant est disponible du lundi au samedi, de 9 h à 17 h ; aucune réponse n’est produite |
+| 5 | 1 | Un fichier existe en dehors du dossier des fiches | L’agent tente de lire le contenu d'un fichier | Un message indique que l’assistant n’accède qu’au dossier des fiches ; le contenu du fichier n’est ni affiché ni transmis au service d’IA |
+| 6 | 2 | Aucune fiche ne correspond à une question liée au support | L’agent pose sa question | Un message indique qu’aucune fiche ne couvre la question ; aucune procédure n’est affichée ; un brouillon est proposé |
+| 7 | 2 | Un brouillon proposé dépasse les 20ko | L'agent valide l'enregistement | Un message indique que cette fiche dépasse 20 ko et aucun fichier n'est crée |
+| 8 | 2 | Un brouillon est affiché avec un nom de fichier libre | L’agent valide l’enregistrement | Une nouvelle fiche en français, avec les sections Symptôme, Étapes et Vérification, apparaît dans le dossier des fiches ; aucun autre fichier n’est créé ni modifié |
+| 9 | 2 | Un brouillon est affiché | L’agent refuse l’enregistrement | Aucun fichier n’est créé ni modifié |
+| 10 | 2 | Le nom de fichier proposé correspond à une fiche existante | L’agent valide l’enregistrement | Un message indique qu’une fiche porte déjà ce nom ; aucun fichier n’est créé ; la fiche existante n’est pas modifiée |
+| 11 | 1, 2 | Le total de la session, ajouté à la taille de la nouvelle demande (question et fiches à transmettre), dépasserait 60 000 jetons | L’agent pose sa question | Un message indique que la question dépasserait la limite de la session ; la question n’est pas transmise au service d’IA |
+| 12 | 1, 2 | Le service d’IA ne répond pas | L’agent pose sa question | Au bout de 30 s, un message d’erreur s’affiche et l’assistant accepte une nouvelle question |
+| 13 | 1, 2 | 10 questions ont déjà été posées pendant la session | L’agent pose une 11ᵉ question | Un message indique que la limite de questions est atteinte ; aucune réponse n’est produite |
+| 14 | 1, 2 | L’assistant a compté 60 000 jetons échangés pendant la session | L’agent pose une nouvelle question | Un message indique que la limite de la session est atteinte ; aucune réponse n’est produite |
+| 15 | 1, 2 | Nous sommes un dimanche, ou en semaine avant 9 h ou après 17 h | L’agent pose une question | Un message indique que l’assistant est disponible du lundi au samedi, de 9 h à 17 h ; aucune réponse n’est produite |
+| 16 | 2 | Le nom de fichier proposé pour un brouillon désigne un emplacement en dehors du dossier des fiches | L’agent valide l’enregistrement | Un message indique que l’enregistrement est refusé ; aucun fichier n’est créé ni modifié en dehors du dossier des fiches |
  
 ## Objectifs d’accessibilité
- Un technicien non-voyant utilise l’outil : une utilisation vocale est demandée. Pas d’autre handicap à prendre en compte.
+ Un technicien non-voyant utilise l’outil : une utilisation vocale est demandée. Pas d’autre handicap à prendre en compte. A preciser ce qui est pris en compte exactement ici, ce n'est pour l'instant qu'une hypothese.
