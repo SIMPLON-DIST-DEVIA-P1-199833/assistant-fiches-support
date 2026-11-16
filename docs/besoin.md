@@ -183,23 +183,6 @@ Quand le technicien demande un brouillon de fiche,
 Alors l'assistant présente une proposition de nouvelle fiche.
 
 
-### Critère 8 : structure d'une fiche
-
-Étant donné qu'un brouillon est préparé selon la structure décrite par Nadia,
-
-Quand le technicien le consulte,
-
-Alors il retrouve un titre, une description du problème, des étapes de résolution et une vérification finale.
-
-
-### Critère 9 : nom des fichiers
-
-Étant donné qu'une nouvelle fiche doit recevoir un nom de fichier,
-
-Quand ce nom est préparé,
-
-Alors il est écrit en minuscules et utilise des tirets à la place des espaces.
-
 
 
 
