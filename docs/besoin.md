@@ -2,7 +2,8 @@
  * un outil de commande a qui des techniciens pose des questions pour répondre aux clients qui font la requète (appel, ou autre)
  * il lit les fiches de procédures existants et se base dessus pour répondre
  * il peut aussi créer des brouillons de nouvelles fiches de procédures
- * il ne doit pas toucher, ecraser, supprimer les fichiers existant sans demander. 
+ * il ne doit pas toucher, ecraser, supprimer les fichiers existant sans demander.
+ * le dossier fiche ne doit contenir aucune données personnelles
  
 
 ## Questions et réponses retenues
@@ -60,7 +61,12 @@
 
 | Situation<br>*Étant donné…* | Action<br>*Quand…* | Résultat attendu<br>*Alors…* |
 | --- | --- | --- |
-| Le dossier `fiches/` contient `reinitialiser-mot-de-passe.md` | Le technicien lance `assistant "Réinitialiser le mot de passe d'un client"` | La réponse cite `reinitialiser-mot-de-passe.md` et contient l'étape « Envoyer un lien de réinitialisation ». |
+| Le dossier `fiches/` contient `reinitialiser-mot-de-passe.md` | Le technicien lance `"Réinitialiser le mot de passe d'un client"` | La réponse cite `reinitialiser-mot-de-passe.md` et contient l'étape « Envoyer un lien de réinitialisation ». |
+| L'utilisateur a besoin de créer un nouvelle fiche | Assistant prépare une request et envoie au service IA pour créer un brouillon | Une fiche brouillon au bon format prêt pour le review
 
 
 ## Objectifs d’accessibilité
+
+| Objectif | Commande de vérification | Résultat attendu |
+| --- | --- | --- |
+| Une aide consultable sans connexion à la passerelle | `assistant --aide` | La commande affiche l'aide, sans appel réseau. |
